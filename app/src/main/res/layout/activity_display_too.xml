@@ -26,7 +26,7 @@
         android:layout_marginTop="30dp"
         android:text="Опишите событие:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_numb" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumb" />
 
     <TextView
         android:id="@+id/textTimeDate"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toEndOf="@+id/button_cancel" />
 
     <EditText
-        android:id="@+id/editText_numb"
+        android:id="@+id/editTextNumb"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textTimeDate" />
 
     <TextView
-        android:id="@+id/text_error_numb"
+        android:id="@+id/textErrorNumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_error_desc"
+        android:id="@+id/textErrorDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -127,7 +127,7 @@
         android:layout_marginTop="30dp"
         android:textColor="#F44336"
         app:layout_constraintStart_toEndOf="@+id/text_descriptor"
-        app:layout_constraintTop_toBottomOf="@+id/editText_numb" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumb" />
 
     <TextView
         android:id="@+id/text_error_dt"

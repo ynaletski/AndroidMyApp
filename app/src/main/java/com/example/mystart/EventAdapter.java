@@ -22,6 +22,7 @@ class EventAdapter extends ArrayAdapter<Event> {
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
+
     public View getView(int position, View convertView, ViewGroup parent) {
 
         final ViewHolder viewHolder;
@@ -30,41 +31,29 @@ class EventAdapter extends ArrayAdapter<Event> {
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
-        else{
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+        else viewHolder = (ViewHolder) convertView.getTag();
         final Event event = eventList.get(position);
 
         viewHolder.number.setText(event.getNumber());
         viewHolder.description.setText(event.getDescription());
         viewHolder.textTimeDate.setText(event.getDate_time());
-        //viewHolder.countView.setText(formatValue(event.getCount(), event.getUnit()));
 
         viewHolder.button_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //int count = product.getCount()-1;
-                //if(count<0) count=0;
-                //product.setCount(count);
-                //viewHolder.countView.setText(formatValue(count, product.getUnit()));
             }
         });
         viewHolder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //int count = product.getCount()+1;
-                //product.setCount(count);
-                //viewHolder.countView.setText(formatValue(count, product.getUnit()));
+
             }
         });
 
         return convertView;
     }
 
-    //private String formatValue(int count, String unit){
-        //return String.valueOf(count) + " " + unit;
-    //}
-    private class ViewHolder {
+    private static class ViewHolder {
         final Button button_edit, button_delete;
         final TextView number, description, textTimeDate;
         ViewHolder(View view){
