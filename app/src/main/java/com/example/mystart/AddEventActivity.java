@@ -9,26 +9,26 @@ import android.widget.EditText; // подключаем класс EditText
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class DisplayTooActivity extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity {
 
     private EditText etDateAndTime;  //из первой активити
     private EditText etNumb;       //в первую активити
     private EditText etDes;        //в первую активити
-    private TextView ErrorNumb;    //проверка данных после нажатия кнопки Подтвердить
-    private TextView ErrorDes;     //проверка данных после нажатия кнопки Подтвердить
+    private TextView errorNumb;    //проверка данных после нажатия кнопки Подтвердить
+    private TextView errorDes;     //проверка данных после нажатия кнопки Подтвердить
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_too);
+        setContentView(R.layout.activity_event_add);
         //Привязываем объявленные объекты к созданным нами элементам в activity_display_too.xml
-        etDateAndTime = (EditText) findViewById(R.id.editTextTimeDate);
+        etDateAndTime = findViewById(R.id.editTextTimeDate);
         //устанавливаем текст переданный из первой активити
         etDateAndTime.setText(getIntent().getStringExtra("EXTRA_TIME_DATE"));
     }
 
     // Метод обработки нажатия на кнопку Отменить
-    public void GoToDisOneEmpty(View view) {
+    public void goToMainActivityWithoutEvent(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         setResult(RESULT_CANCELED, intent);
         finish();
@@ -37,30 +37,30 @@ public class DisplayTooActivity extends AppCompatActivity {
 
     //Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
-    public void GoToDisOne(View view) {
+    public void goToMainActivityWithEvent(View view) {
         //Привязываем объявленные объекты к созданным нами элементам в activity_display_too
-        etNumb = (EditText) findViewById(R.id.editTextNumb);
-        etDes = (EditText) findViewById(R.id.editTextDescriptor);
-        etDateAndTime = (EditText) findViewById(R.id.editTextTimeDate);
+        etNumb = findViewById(R.id.editTextNumb);
+        etDes = findViewById(R.id.editTextDescriptor);
+        etDateAndTime = findViewById(R.id.editTextTimeDate);
         //проверка ввода номера события и описания
         if (etNumb.getText().length() > 0) {
             if (Integer.parseInt(etNumb.getText().toString()) < 1 ||
                     Integer.parseInt(etNumb.getText().toString()) > 1000) {
-                ErrorNumb = (TextView) findViewById(R.id.textErrorNumb);
-                ErrorNumb.setText("Введите: 1-100");
+                errorNumb = findViewById(R.id.textErrorNumb);
+                errorNumb.setText("Введите: 1-100");
             } else {
                 //проверка ввода описания
                 if (etDes.getText().length() > 0) {
                     //отправка данных в первую активити
                     SendDataToDisOne();
                 } else {
-                    ErrorDes = (TextView) findViewById(R.id.textErrorDesc);
-                    ErrorDes.setText("Введите описание");
+                    errorDes = findViewById(R.id.textErrorDesc);
+                    errorDes.setText("Введите описание");
                 }
             }
         } else {
-            ErrorNumb = (TextView) findViewById(R.id.textErrorNumb);
-            ErrorNumb.setText("Введите значение");
+            errorNumb = findViewById(R.id.textErrorNumb);
+            errorNumb.setText("Введите значение");
         }
     }
 

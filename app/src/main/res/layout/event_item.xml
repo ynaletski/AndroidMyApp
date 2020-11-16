@@ -12,8 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/description"
@@ -36,13 +35,13 @@
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <Button
-        android:id="@+id/button_delete"
+        android:id="@+id/buttonDelete"
         android:layout_width="75dp"
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
-        android:onClick="GoToDisOne"
+        android:onClick="goToMainActivityWithEvent"
         android:text="Delete"
         app:layout_constraintEnd_toStartOf="@+id/textTimeDate"
         app:layout_constraintTop_toBottomOf="@+id/description" />

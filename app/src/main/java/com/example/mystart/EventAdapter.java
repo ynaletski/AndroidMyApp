@@ -12,11 +12,9 @@ import java.util.ArrayList;
 
 class EventAdapter extends ArrayAdapter<Event> {
 
-    Cash cash = Cash.getInstance();
-
-    private LayoutInflater inflater;
-    private int layout;
-    private ArrayList<Event> eventList;
+    private final LayoutInflater inflater;
+    private final int layout;
+    private final ArrayList<Event> eventList;
 
     EventAdapter(Context context, int resource, ArrayList<Event> events) {
         super(context, resource, events);
@@ -28,23 +26,22 @@ class EventAdapter extends ArrayAdapter<Event> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder viewHolder;
-        if(convertView==null){
+        if (null == convertView) {
             convertView = inflater.inflate(this.layout, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }
-        else viewHolder = (ViewHolder) convertView.getTag();
+        } else viewHolder = (ViewHolder) convertView.getTag();
 
         final Event event = eventList.get(position);
 
         viewHolder.number.setText(event.getNumber());
         viewHolder.description.setText(event.getDescription());
-        viewHolder.textTimeDate.setText(event.getDate_time());
+        viewHolder.textTimeDate.setText(event.getDateTime());
 
-        viewHolder.button_delete.setOnClickListener(new View.OnClickListener() {
+        viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cash.getArray().remove(position);
+                Cash.getInstance().getArray().remove(position);
                 notifyDataSetChanged();
             }
         });
@@ -53,13 +50,14 @@ class EventAdapter extends ArrayAdapter<Event> {
     }
 
     private static class ViewHolder {
-        final Button button_delete;
+        final Button buttonDelete;
         final TextView number, description, textTimeDate;
-        ViewHolder(View view){
-            button_delete = (Button) view.findViewById(R.id.button_delete);
-            number = (TextView) view.findViewById(R.id.number);
-            description = (TextView) view.findViewById(R.id.description);
-            textTimeDate = (TextView) view.findViewById(R.id.textTimeDate);
+
+        ViewHolder(View view) {
+            buttonDelete = view.findViewById(R.id.buttonDelete);
+            number = view.findViewById(R.id.number);
+            description = view.findViewById(R.id.description);
+            textTimeDate = view.findViewById(R.id.textTimeDate);
         }
     }
 

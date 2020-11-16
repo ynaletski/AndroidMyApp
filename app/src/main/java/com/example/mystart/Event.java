@@ -4,12 +4,12 @@ public class Event {
 
     private String number;
     private String description;
-    private String date_time;
+    private String dateTime;
 
-    Event(String number, String description, String date_time) {
+    Event(String number, String description, String dateTime) {
         this.number = number;
         this.description = description;
-        this.date_time = date_time;
+        this.dateTime = dateTime;
     }
 
     public void setNumber(String number) {
@@ -28,12 +28,12 @@ public class Event {
         return description;
     }
 
-    public void setDate_time(String date_time) {
-        this.date_time = date_time;
+    public void setDate_time(String dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public String getDate_time() {
-        return date_time;
+    public String getDateTime() {
+        return dateTime;
     }
 
 }

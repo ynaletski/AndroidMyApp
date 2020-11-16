@@ -5,9 +5,10 @@ import android.content.Intent; // подключаем класс Intent
 import android.os.Bundle;
 import android.view.View; // подключаем класс View для обработки нажатия кнопки
 import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,31 +16,27 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_TIME_DATE = "EXTRA_TIME_DATE";
     final int REQUEST_TWO_ACT = 1;
 
-    EventAdapter adapter;
-    Cash cash = Cash.getInstance();
-
-    private ArrayList<Event> events = new ArrayList();
-    private ListView eventList;
+    private EventAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(cash.getArray().size() == 0) {
-            cash.addEventDefault();
+        if (Cash.getInstance().getArray().size() == 0) {
+            Cash.getInstance().addEventDefault();
         }
 
-        eventList = (ListView) findViewById(R.id.eventList);
-        adapter = new EventAdapter(this, R.layout.event_item, cash.getArray());
+        ListView eventList = findViewById(R.id.eventList);
+        adapter = new EventAdapter(this, R.layout.event_item, Cash.getInstance().getArray());
         eventList.setAdapter(adapter);
     }
 
     // Метод обработки нажатия на кнопку
-    public void GoToDisTwo(View view) {
+    public void goToAddEventActivity(View view) {
         // действия, совершаемые после нажатия на кнопку
         // Создаем объект Intent для вызова новой Activity
-        Intent intent = new Intent(this, DisplayTooActivity.class);
+        Intent intent = new Intent(this, AddEventActivity.class);
 
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatForDate = new SimpleDateFormat("hh:mm dd.MM.yyyy");
@@ -50,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_TIME_DATE, mess);
 
         // запуск activity
-        startActivityForResult(intent,REQUEST_TWO_ACT);
-        }
+        startActivityForResult(intent, REQUEST_TWO_ACT);
+    }
 
-        //метод принимающий результат со второй активити()
+    //метод принимающий результат со второй активити()
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            cash.addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
+        if (resultCode == RESULT_OK) {
+            Cash.getInstance().addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
                     data.getStringExtra("TAD"));
             adapter.notifyDataSetChanged();
         }
