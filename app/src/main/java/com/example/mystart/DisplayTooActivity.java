@@ -45,7 +45,7 @@ public class DisplayTooActivity extends AppCompatActivity {
         //проверка ввода номера события и описания
         if (etNumb.getText().length() > 0) {
             if (Integer.parseInt(etNumb.getText().toString()) < 1 ||
-                    Integer.parseInt(etNumb.getText().toString()) > 100) {
+                    Integer.parseInt(etNumb.getText().toString()) > 1000) {
                 ErrorNumb = (TextView) findViewById(R.id.textErrorNumb);
                 ErrorNumb.setText("Введите: 1-100");
             } else {

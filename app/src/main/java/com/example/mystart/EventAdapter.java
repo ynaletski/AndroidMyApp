@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 class EventAdapter extends ArrayAdapter<Event> {
 
+    Cash cash = Cash.getInstance();
+
     private LayoutInflater inflater;
     private int layout;
     private ArrayList<Event> eventList;
@@ -23,7 +25,7 @@ class EventAdapter extends ArrayAdapter<Event> {
         this.inflater = LayoutInflater.from(context);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder viewHolder;
         if(convertView==null){
@@ -32,21 +34,18 @@ class EventAdapter extends ArrayAdapter<Event> {
             convertView.setTag(viewHolder);
         }
         else viewHolder = (ViewHolder) convertView.getTag();
+
         final Event event = eventList.get(position);
 
         viewHolder.number.setText(event.getNumber());
         viewHolder.description.setText(event.getDescription());
         viewHolder.textTimeDate.setText(event.getDate_time());
 
-        viewHolder.button_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         viewHolder.button_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cash.getArray().remove(position);
+                notifyDataSetChanged();
             }
         });
 
@@ -54,10 +53,9 @@ class EventAdapter extends ArrayAdapter<Event> {
     }
 
     private static class ViewHolder {
-        final Button button_edit, button_delete;
+        final Button button_delete;
         final TextView number, description, textTimeDate;
         ViewHolder(View view){
-            button_edit = (Button) view.findViewById(R.id.button_edit);
             button_delete = (Button) view.findViewById(R.id.button_delete);
             number = (TextView) view.findViewById(R.id.number);
             description = (TextView) view.findViewById(R.id.description);

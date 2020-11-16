@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_TIME_DATE = "EXTRA_TIME_DATE";
     final int REQUEST_TWO_ACT = 1;
 
+    EventAdapter adapter;
+    Cash cash = Cash.getInstance();
+
     private ArrayList<Event> events = new ArrayList();
     private ListView eventList;
 
@@ -23,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(cash.getArray().size() == 0) {
+            cash.addEventDefault();
+        }
+
         eventList = (ListView) findViewById(R.id.eventList);
-        EventAdapter adapter = new EventAdapter(this, R.layout.event_item, events);
+        adapter = new EventAdapter(this, R.layout.event_item, cash.getArray());
         eventList.setAdapter(adapter);
-
     }
-
 
     // Метод обработки нажатия на кнопку
     public void GoToDisTwo(View view) {
@@ -45,19 +50,17 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_TIME_DATE, mess);
 
         // запуск activity
-        //startActivity(intent);
         startActivityForResult(intent,REQUEST_TWO_ACT);
         }
 
+        //метод принимающий результат со второй активити()
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
-            events.add(new Event( data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
-                    data.getStringExtra("TAD")));
-            eventList = (ListView) findViewById(R.id.eventList);
-            EventAdapter adapter = new EventAdapter(this, R.layout.event_item, events);
-            eventList.setAdapter(adapter);
+            cash.addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
+                    data.getStringExtra("TAD"));
+            adapter.notifyDataSetChanged();
         }
     }
 
