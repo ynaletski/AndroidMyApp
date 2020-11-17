@@ -41,7 +41,7 @@ class EventAdapter extends ArrayAdapter<Event> {
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cash.getInstance().getArray().remove(position);
+                Cash.getInstance().getEvents().remove(position);
                 notifyDataSetChanged();
             }
         });

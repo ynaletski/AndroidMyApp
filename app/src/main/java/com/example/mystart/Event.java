@@ -28,7 +28,7 @@ public class Event {
         return description;
     }
 
-    public void setDate_time(String dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 

@@ -17,17 +17,8 @@ public final class Cash {
         return INSTANCE;
     }
 
-    public ArrayList<Event> getArray() {
+    public ArrayList<Event> getEvents() {
         return events;
-    }
-
-    public void addEventDefault() {
-        events.add(new Event("1", "Для добавления события нажмите кнопку Добавить событие." +
-                " После ввода номера, описания и времени создания события" +
-                "подтвердите создание либо отмените, нажав на " +
-                "соответствующие кнопки. Для редактирования и удаления события," +
-                "так же необходимо нажать на соответствующие кнопки.",
-                "02.02.2020 02:20"));
     }
 
     public void addEvent(String numb, String desc, String time) {

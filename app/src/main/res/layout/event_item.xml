@@ -44,6 +44,7 @@
         android:onClick="goToMainActivityWithEvent"
         android:text="Delete"
         app:layout_constraintEnd_toStartOf="@+id/textTimeDate"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

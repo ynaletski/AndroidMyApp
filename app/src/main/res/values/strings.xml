@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyStart</string>
+    <string name="defaultNumber">1</string>
+    <string name="defaultTextDescription"> Для добавления события нажмите кнопку Добавить событие.
+                                        Подтвердите создание либо отмените, нажав на
+                                        соответствующие кнопки. Для редактирования и удаления
+                                        события, так же необходимо нажать на соответствующие кнопки. </string>
+    <string name="defaultDateTime">20.20.2020 02:02</string>
 </resources>
