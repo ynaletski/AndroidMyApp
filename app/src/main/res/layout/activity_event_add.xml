@@ -7,7 +7,7 @@
     tools:context=".AddEventActivity">
 
     <TextView
-        android:id="@+id/textNumb"
+        android:id="@+id/suggest_numb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -19,7 +19,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textDescriptor"
+        android:id="@+id/suggest_descriptor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -27,11 +27,11 @@
         android:layout_marginTop="30dp"
         android:text="Опишите событие:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumb"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_numb"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textTimeDate"
+        android:id="@+id/time_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -39,11 +39,11 @@
         android:layout_marginTop="30dp"
         android:text="Дата и время создания:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescriptor"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_descriptor"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/buttonCancel"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
@@ -56,7 +56,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/buttonOk"
+        android:id="@+id/button_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -65,11 +65,11 @@
         android:onClick="goToMainActivityWithEvent"
         android:text="Подтвердить"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonCancel"
+        app:layout_constraintStart_toEndOf="@+id/button_cancel"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/editTextNumb"
+        android:id="@+id/edit_text_numb"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -81,11 +81,11 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNumb"
+        app:layout_constraintTop_toBottomOf="@+id/suggest_numb"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/editTextDescriptor"
+        android:id="@+id/edit_text_descriptor"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -96,11 +96,11 @@
         android:hint="Описание"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescriptor"
+        app:layout_constraintTop_toBottomOf="@+id/suggest_descriptor"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/editTextTimeDate"
+        android:id="@+id/edit_text_time_date"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -112,39 +112,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTimeDate" />
+        app:layout_constraintTop_toBottomOf="@+id/time_date" />
 
     <TextView
-        android:id="@+id/textErrorNumb"
+        android:id="@+id/error_numb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
         android:textColor="#F44336"
-        app:layout_constraintStart_toEndOf="@+id/textNumb"
+        app:layout_constraintStart_toEndOf="@+id/suggest_numb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textErrorDesc"
+        android:id="@+id/error_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:textColor="#F44336"
-        app:layout_constraintStart_toEndOf="@+id/textDescriptor"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumb" />
+        app:layout_constraintStart_toEndOf="@+id/suggest_descriptor"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_numb" />
 
     <TextView
-        android:id="@+id/textErrorDT"
+        android:id="@+id/error_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:textColor="#F44336"
-        app:layout_constraintStart_toEndOf="@+id/textTimeDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescriptor" />
+        app:layout_constraintStart_toEndOf="@+id/time_date"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_descriptor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

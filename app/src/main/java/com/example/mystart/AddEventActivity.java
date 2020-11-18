@@ -40,7 +40,7 @@ public class AddEventActivity extends AppCompatActivity {
         if (numb.getText().length() > 0) {
             if (Integer.parseInt(numb.getText().toString()) < 1 ||
                     Integer.parseInt(numb.getText().toString()) > 1000) {
-                errorNumb = findViewById(R.id.textErrorNumb);
+                errorNumb = findViewById(R.id.error_numb);
                 errorNumb.setText("Введите: 1-100");
             } else {
                 //проверка ввода описания
@@ -48,12 +48,12 @@ public class AddEventActivity extends AppCompatActivity {
                     //отправка данных в первую активити
                     sendDataToMainActivity();
                 } else {
-                    errorDes = findViewById(R.id.textErrorDesc);
+                    errorDes = findViewById(R.id.error_desc);
                     errorDes.setText("Введите описание");
                 }
             }
         } else {
-            errorNumb = findViewById(R.id.textErrorNumb);
+            errorNumb = findViewById(R.id.error_numb);
             errorNumb.setText("Введите значение");
         }
     }
@@ -61,9 +61,9 @@ public class AddEventActivity extends AppCompatActivity {
     //метод для инициализации вьюшек
     public void initializeView(){
 
-        numb = findViewById(R.id.editTextNumb);
-        des = findViewById(R.id.editTextDescriptor);
-        dateAndTime = findViewById(R.id.editTextTimeDate);
+        numb = findViewById(R.id.edit_text_numb);
+        des = findViewById(R.id.edit_text_descriptor);
+        dateAndTime = findViewById(R.id.edit_text_time_date);
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatForDate = new SimpleDateFormat("hh:mm dd.MM.yyyy");
         dateAndTime.setText(formatForDate.format(date));

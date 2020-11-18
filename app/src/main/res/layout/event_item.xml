@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textTimeDate"
+        android:id="@+id/time_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <Button
-        android:id="@+id/buttonDelete"
+        android:id="@+id/button_delete"
         android:layout_width="75dp"
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
@@ -43,7 +43,7 @@
         android:layout_marginRight="35dp"
         android:onClick="goToMainActivityWithEvent"
         android:text="Delete"
-        app:layout_constraintEnd_toStartOf="@+id/textTimeDate"
+        app:layout_constraintEnd_toStartOf="@+id/time_date"
         app:layout_constraintTop_toBottomOf="@+id/description"
         tools:ignore="HardcodedText" />
 
