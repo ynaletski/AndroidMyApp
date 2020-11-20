@@ -19,6 +19,13 @@ public class AddEventActivity extends AppCompatActivity {
     private TextView errorNumb;    //проверка данных после нажатия кнопки Подтвердить
     private TextView errorDes;     //проверка данных после нажатия кнопки Подтвердить
 
+    private enum Error{
+        numbScale,
+        numbNull,
+        descriptionNull,
+        without
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,35 +42,35 @@ public class AddEventActivity extends AppCompatActivity {
     //Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
     public void goToMainActivityWithEvent(View view) {
+
         initializeView();
 
-        if (numb.getText().length() > 0) {
-            if (Integer.parseInt(numb.getText().toString()) < 1 ||
-                    Integer.parseInt(numb.getText().toString()) > 1000) {
-                errorNumb = findViewById(R.id.error_numb);
-                errorNumb.setText("Введите: 1-100");
-            } else {
-                //проверка ввода описания
-                if (des.getText().length() > 0) {
-                    //отправка данных в первую активити
-                    sendDataToMainActivity();
-                } else {
-                    errorDes = findViewById(R.id.error_desc);
-                    errorDes.setText("Введите описание");
-                }
-            }
-        } else {
-            errorNumb = findViewById(R.id.error_numb);
-            errorNumb.setText("Введите значение");
+        Error error = validationOfData();
+
+        switch (error){
+            case without:
+                sendDataToMainActivity();
+                break;
+            case numbNull:
+                errorNumb.setText(getResources().getString(R.string.errorNumbNull));
+                break;
+            case numbScale:
+                errorNumb.setText(getResources().getString(R.string.errorNumbScale));
+                break;
+            case descriptionNull:
+                errorDes.setText(getResources().getString(R.string.errorDescriptionNull));
+                break;
         }
     }
 
     //метод для инициализации вьюшек
     public void initializeView(){
 
-        numb = findViewById(R.id.edit_text_numb);
-        des = findViewById(R.id.edit_text_descriptor);
-        dateAndTime = findViewById(R.id.edit_text_time_date);
+        numb = findViewById(R.id.editTextNumb);
+        des = findViewById(R.id.editTextDescriptor);
+        dateAndTime = findViewById(R.id.editTextTimeDate);
+        errorNumb = findViewById(R.id.errorNumb);
+        errorDes = findViewById(R.id.errorDesc);
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatForDate = new SimpleDateFormat("hh:mm dd.MM.yyyy");
         dateAndTime.setText(formatForDate.format(date));
@@ -83,4 +90,22 @@ public class AddEventActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
+
+    public Error validationOfData(){
+        if (numb.getText().length() > 0) {
+            if (Integer.parseInt(numb.getText().toString()) < 1 ||
+                    Integer.parseInt(numb.getText().toString()) > 1000) {
+                return Error.numbScale;
+            } else {
+                if (des.getText().length() > 0) {
+                    return Error.without;
+                } else {
+                    return Error.descriptionNull;
+                }
+            }
+        } else {
+            return Error.numbNull;
+        }
+    }
+
 }

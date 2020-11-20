@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                                         getResources().getString(R.string.defaultDateTime));
         }
 
-        recyclerView = findViewById(R.id.event_list);
+        recyclerView = findViewById(R.id.eventList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false);
@@ -52,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == RESULT_OK) {
             Cash.getInstance().addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
                     data.getStringExtra("TAD"));
 
             eventAdapter.notifyDataSetChanged();
+
         }
     }
 

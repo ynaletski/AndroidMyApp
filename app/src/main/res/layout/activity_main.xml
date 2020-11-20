@@ -8,18 +8,18 @@
 
     <!--<ListView-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/event_list"
+        android:id="@+id/eventList"
         android:layout_width="match_parent"
-        android:layout_height="554dp"
+        android:layout_height="487dp"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_add"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"

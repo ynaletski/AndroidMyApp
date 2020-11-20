@@ -60,10 +60,10 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            buttonDelete = itemView.findViewById(R.id.button_delete);
+            buttonDelete = itemView.findViewById(R.id.buttonDelete);
             number = itemView.findViewById(R.id.number);
             description = itemView.findViewById(R.id.description);
-            textTimeDate = itemView.findViewById(R.id.time_date);
+            textTimeDate = itemView.findViewById(R.id.timeDate);
         }
     }
 
@@ -71,7 +71,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
 
 //стандартный адаптер
-/*package com.example.mystart;
+/*package com.example.;
 
 import android.content.Context;
 import android.view.LayoutInflater;
