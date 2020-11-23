@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View; // подключаем класс View для обработки нажатия кнопки
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +57,14 @@ public class MainActivity extends AppCompatActivity {
             Cash.getInstance().addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"),
                     data.getStringExtra("TAD"));
 
-            eventAdapter.notifyDataSetChanged();
+            //eventAdapter.notifyDataSetChanged();
+            EventDiffUtil eventDiffUtil =
+                    new EventDiffUtil(eventAdapter.getData(), Cash.getInstance().getEvents());
+            DiffUtil.DiffResult productDiffResult = DiffUtil.calculateDiff(eventDiffUtil);
+
+            recyclerView.setAdapter(eventAdapter);
+            productDiffResult.dispatchUpdatesTo(eventAdapter);
+
 
         }
     }

@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.ArrayList;
 
-class EventDiffUtill extends DiffUtil.Callback {
+class EventDiffUtil extends DiffUtil.Callback {
 
     private ArrayList<Event> oldList;
     private ArrayList<Event> newList;
 
-    public EventDiffUtill(ArrayList<Event> oldList, ArrayList<Event> newList) {
+    public EventDiffUtil(ArrayList<Event> oldList, ArrayList<Event> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }
