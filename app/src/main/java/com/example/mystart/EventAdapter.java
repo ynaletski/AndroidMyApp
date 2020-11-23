@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -23,7 +24,14 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     }
 
     ArrayList<Event> getData(){
-        return events;
+        return this.events;
+    }
+
+    public void insertData(ArrayList<Event> newEvents){
+        EventDiffUtil eventDiffUtil = new EventDiffUtil(events, newEvents);
+        DiffUtil.DiffResult eventDiffResult = DiffUtil.calculateDiff(eventDiffUtil);
+        events.addAll(newEvents);
+        eventDiffResult.dispatchUpdatesTo(this);
     }
 
     @NonNull

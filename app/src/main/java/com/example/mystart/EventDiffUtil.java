@@ -1,14 +1,13 @@
 package com.example.mystart;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.ArrayList;
 
 class EventDiffUtil extends DiffUtil.Callback {
 
-    private ArrayList<Event> oldList;
-    private ArrayList<Event> newList;
+    private final ArrayList<Event> oldList;
+    private final ArrayList<Event> newList;
 
     public EventDiffUtil(ArrayList<Event> oldList, ArrayList<Event> newList) {
         this.oldList = oldList;
@@ -30,7 +29,6 @@ class EventDiffUtil extends DiffUtil.Callback {
         Event oldEvent = oldList.get(oldItemPosition);
         Event newEvent = newList.get(newItemPosition);
         return oldEvent.hashCode() == newEvent.hashCode();
-        //oldEvent.getDateTime().equals(newEvent.getDateTime());
     }
 
     @Override
@@ -41,10 +39,4 @@ class EventDiffUtil extends DiffUtil.Callback {
                 oldEvent.getNumber().equals(newEvent.getNumber());
     }
 
-    @Nullable
-    @Override
-    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
-        //you can return particular field for changed item.
-        return super.getChangePayload(oldItemPosition, newItemPosition);
-    }
 }
