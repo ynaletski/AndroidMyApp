@@ -26,7 +26,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.event_item,parent,false);
+        View view = inflater.inflate(R.layout.event_item, parent, false);
         return new EventViewHolder(view);
     }
 
@@ -52,7 +52,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
         return events.size();
     }
 
-    static class EventViewHolder extends RecyclerView.ViewHolder{
+    static class EventViewHolder extends RecyclerView.ViewHolder {
 
         final Button buttonDelete;
         final TextView number, description, textTimeDate;

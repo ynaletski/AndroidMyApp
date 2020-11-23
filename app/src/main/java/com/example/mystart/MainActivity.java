@@ -25,17 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (Cash.getInstance().getEvents().size() == 0) {
             Cash.getInstance().addEvent(getResources().getString(R.string.defaultNumber),
-                                        getResources().getString(R.string.defaultTextDescription),
-                                        getResources().getString(R.string.defaultDateTime));
+                    getResources().getString(R.string.defaultTextDescription),
+                    getResources().getString(R.string.defaultDateTime));
         }
 
         recyclerView = findViewById(R.id.eventList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false);
-        eventAdapter = new EventAdapter(this,Cash.getInstance().getEvents());
+        eventAdapter = new EventAdapter(this, Cash.getInstance().getEvents());
         recyclerView.setAdapter(eventAdapter);
-
 
     }
 

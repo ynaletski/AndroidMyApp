@@ -1,6 +1,7 @@
 package com.example.mystart;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent; // подключаем класс Intent
 import android.view.View; // подключаем класс View для обработки нажатия кнопки
@@ -19,7 +20,7 @@ public class AddEventActivity extends AppCompatActivity {
     private TextView errorNumb;    //проверка данных после нажатия кнопки Подтвердить
     private TextView errorDes;     //проверка данных после нажатия кнопки Подтвердить
 
-    private enum Error{
+    private enum Error {
         numbScale,
         numbNull,
         descriptionNull,
@@ -47,7 +48,7 @@ public class AddEventActivity extends AppCompatActivity {
 
         Error error = validationOfData();
 
-        switch (error){
+        switch (error) {
             case without:
                 sendDataToMainActivity();
                 break;
@@ -64,7 +65,7 @@ public class AddEventActivity extends AppCompatActivity {
     }
 
     //метод для инициализации вьюшек
-    public void initializeView(){
+    public void initializeView() {
 
         numb = findViewById(R.id.editTextNumb);
         des = findViewById(R.id.editTextDescriptor);
@@ -91,7 +92,7 @@ public class AddEventActivity extends AppCompatActivity {
         finish();
     }
 
-    public Error validationOfData(){
+    public Error validationOfData() {
         if (numb.getText().length() > 0) {
             if (Integer.parseInt(numb.getText().toString()) < 1 ||
                     Integer.parseInt(numb.getText().toString()) > 1000) {
