@@ -53,8 +53,14 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
             @Override
             public void onClick(View v) {
                 Cash.getInstance().getEvents().remove(position);
-                notifyItemRemoved(position);
-                //notifyDataSetChanged();
+                try {
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, getItemCount());
+                }
+                catch (Exception e){
+                    notifyDataSetChanged();
+                }
+
             }
         });
     }
