@@ -28,11 +28,10 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     }
 
     public void insertData(ArrayList<Event> newEvents){
-        EventDiffUtil eventDiffUtil = new EventDiffUtil(events, newEvents);
-        DiffUtil.DiffResult eventDiffResult = DiffUtil.calculateDiff(eventDiffUtil);
+        DiffUtil.calculateDiff(new EventDiffUtil(events,newEvents)).dispatchUpdatesTo(this);
         events.addAll(newEvents);
-        eventDiffResult.dispatchUpdatesTo(this);
     }
+
 
     @NonNull
     @Override
@@ -54,7 +53,8 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
             @Override
             public void onClick(View v) {
                 Cash.getInstance().getEvents().remove(position);
-                notifyDataSetChanged();
+                notifyItemRemoved(position);
+                //notifyDataSetChanged();
             }
         });
     }
