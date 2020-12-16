@@ -26,17 +26,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (Cash.getInstance().getEvents().size() == 0) {
-            Cash.getInstance().addEvent(getResources().getString(R.string.defaultNumber),
-                    getResources().getString(R.string.defaultTextDescription),
-                    getResources().getString(R.string.defaultDateTime));
+            Cash.getInstance().addEvent
+                    (getResources().getString(R.string.defaultNumber),
+                            getResources().getString(R.string.defaultTextDescription),
+                            getResources().getString(R.string.defaultDateTime));
         }
 
         recyclerView = findViewById(R.id.eventList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false);
-        eventAdapter = new EventAdapter(this, Cash.getInstance().getEvents());
+        eventAdapter = new EventAdapter(this, /*Cash.getInstance().getEvents(),*/ new removeClickListener() {
+
+            @Override
+            public void removeEvent(int positionEvent) {
+                Cash.getInstance().getEvents().remove(positionEvent);
+                if (Cash.getInstance().getEvents().size() == 0) {
+                    Cash.getInstance().addEvent
+                            (getResources().getString(R.string.defaultNumber),
+                                    getResources().getString(R.string.defaultTextDescription),
+                                    getResources().getString(R.string.defaultDateTime));
+                }
+                eventAdapter.insertData(Cash.getInstance().getEvents());
+            }
+        });
         recyclerView.setAdapter(eventAdapter);
+        eventAdapter.insertData(Cash.getInstance().getEvents());
 
     }
 
@@ -56,15 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
 
-            ArrayList<Event> eventList = new ArrayList<>();
-            eventList.add(new Event(data.getStringExtra("NUMB"), data.getStringExtra("DESC"), data.getStringExtra("TAD")));
+            //ArrayList<Event> eventList = new ArrayList<>();
+            //eventList.add(new Event(data.getStringExtra("NUMB"), data.getStringExtra("DESC"), data.getStringExtra("TAD")));
 
             //перезапись
             //Cash.getInstance().addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"), data.getStringExtra("TAD"));
             //eventAdapter.notifyDataSetChanged();
 
-            eventAdapter.insertData(eventList);
+            //eventAdapter.insertData(eventList);
+            eventAdapter.insertData(Cash.getInstance().getEvents());
         }
     }
-
 }

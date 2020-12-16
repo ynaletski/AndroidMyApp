@@ -29,14 +29,15 @@ class EventDiffUtil extends DiffUtil.Callback {
         Event oldEvent = oldList.get(oldItemPosition);
         Event newEvent = newList.get(newItemPosition);
         return oldEvent.hashCode() == newEvent.hashCode();
+
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         Event oldEvent = oldList.get(oldItemPosition);
         Event newEvent = newList.get(newItemPosition);
-        return oldEvent.getDescription().equals(newEvent.getDescription()) &&
-                oldEvent.getNumber().equals(newEvent.getNumber());
+        //return oldEvent.getDescription().equals(newEvent.getDescription());
+        return oldEvent.equals(newEvent);
     }
 
 }

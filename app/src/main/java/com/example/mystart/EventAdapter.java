@@ -16,22 +16,14 @@ import java.util.ArrayList;
 class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private final LayoutInflater inflater;
-    private final ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
+    private final removeClickListener removeClickListener;
 
-    EventAdapter(Context context, ArrayList<Event> events) {
-        this.events = events;
+    EventAdapter(Context context, /*ArrayList<Event> events,*/ removeClickListener removeClickListener) {
+        /*this.events = events;*/
         this.inflater = LayoutInflater.from(context);
+        this.removeClickListener = removeClickListener;
     }
-
-    ArrayList<Event> getData(){
-        return this.events;
-    }
-
-    public void insertData(ArrayList<Event> newEvents){
-        DiffUtil.calculateDiff(new EventDiffUtil(events,newEvents)).dispatchUpdatesTo(this);
-        events.addAll(newEvents);
-    }
-
 
     @NonNull
     @Override
@@ -49,17 +41,12 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
         holder.description.setText(event.getDescription());
         holder.textTimeDate.setText(event.getDateTime());
 
-        holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+        holder.deleteEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cash.getInstance().getEvents().remove(position);
-                try {
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount());
-                }
-                catch (Exception e){
-                    notifyDataSetChanged();
-                }
+
+                removeClickListener.removeEvent(position);
+                notifyItemRangeChanged(position, getItemCount());
 
             }
         });
@@ -70,15 +57,24 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
         return events.size();
     }
 
+    public void insertData(ArrayList<Event> newEvents) {
+        if (newEvents != null) {
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new EventDiffUtil(events, newEvents));
+            this.events.clear();
+            this.events.addAll(newEvents);
+            diffResult.dispatchUpdatesTo(this);
+        }
+    }
+
     static class EventViewHolder extends RecyclerView.ViewHolder {
 
-        final Button buttonDelete;
+        final Button deleteEvent;
         final TextView number, description, textTimeDate;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            buttonDelete = itemView.findViewById(R.id.buttonDelete);
+            deleteEvent = itemView.findViewById(R.id.buttonDelete);
             number = itemView.findViewById(R.id.number);
             description = itemView.findViewById(R.id.description);
             textTimeDate = itemView.findViewById(R.id.timeDate);

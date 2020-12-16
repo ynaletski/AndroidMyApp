@@ -21,7 +21,20 @@ public final class Cash {
         return events;
     }
 
-    public void addEvent(String numb, String desc, String time) {
-        events.add(new Event(numb, desc, time));
+    public void addEvent(String numberEvent, String descriptionEvent, String timeEvent) {
+        boolean validate = true;
+        for (int i = 0; i < events.size(); i++) {
+            if (getEvents(i).getDescription().equals(descriptionEvent) && getEvents(i).getNumber().equals(numberEvent)) {
+                validate = false;
+                break;
+            }
+        }
+        if (validate) {
+            events.add(new Event(numberEvent, descriptionEvent, timeEvent));
+        }
+    }
+
+    public Event getEvents(int position) {
+        return events.get(position);
     }
 }
