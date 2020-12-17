@@ -16,7 +16,7 @@ import java.util.ArrayList;
 class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private final LayoutInflater inflater;
-    private ArrayList<Event> events = new ArrayList<>();
+    private final ArrayList<Event> events = new ArrayList<>();
     private final removeClickListener removeClickListener;
 
     EventAdapter(Context context, /*ArrayList<Event> events,*/ removeClickListener removeClickListener) {

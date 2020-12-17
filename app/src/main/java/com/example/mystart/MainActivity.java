@@ -8,16 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     //public final static String EXTRA_TIME_DATE = "EXTRA_TIME_DATE";
     final int REQUEST_TWO_ACT = 1;
 
-    //стандартный адаптер
-    /*private EventAdapter adapter;*/
-    private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
 
     @Override
@@ -32,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
                             getResources().getString(R.string.defaultDateTime));
         }
 
-        recyclerView = findViewById(R.id.eventList);
+        //стандартный адаптер
+        /*private EventAdapter adapter;*/
+        RecyclerView recyclerView = findViewById(R.id.eventList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false);
