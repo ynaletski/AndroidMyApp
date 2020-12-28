@@ -1,13 +1,13 @@
 package com.example.mystart;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.Intent; // подключаем класс Intent
-import android.view.View; // подключаем класс View для обработки нажатия кнопки
-import android.widget.EditText; // подключаем класс EditText
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +20,8 @@ public class AddEventActivity extends AppCompatActivity {
     private TextView errorNumber;    //проверка данных после нажатия кнопки Подтвердить
     private TextView errorDescription;     //проверка данных после нажатия кнопки Подтвердить
 
+    private Repository repository;
+
     private enum Error {
         NUMB_SCALE,
         NUMB_NULL,
@@ -31,20 +33,18 @@ public class AddEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add);
+
+        initializeView();
     }
 
     // Метод обработки нажатия на кнопку Отменить
     public void goToMainActivityWithoutEvent(View view) {
-        /*Intent intent = new Intent(this, MainActivity.class);
-        setResult(RESULT_CANCELED, intent);*/
         finish();
     }
 
     //Метод обработки нажатия на кнопку Подтвердить
     @SuppressLint("SetTextI18n")
     public void goToMainActivityWithEvent(View view) {
-
-        initializeView();
 
         Error error = validationOfData();
 
@@ -75,20 +75,28 @@ public class AddEventActivity extends AppCompatActivity {
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatForDate = new SimpleDateFormat("hh:mm dd.MM.yyyy");
         dateAndTime.setText(formatForDate.format(date));
+        repository = new Repository(this);
 
     }
 
     //функция для отправки данных на первый activity
     public void sendDataToMainActivity() {
-        // Создаем объект Intent для вызова новой Activity
         Intent intent = new Intent(this, MainActivity.class);
-        // Добавляем с помощью свойства putExtra объект - первый параметр - ключ,
-        // второй параметр - значение этого объекта
         //intent.putExtra("NUMB", noteNumber.getText().toString());
         //intent.putExtra("DESC", noteDescription.getText().toString());
         //intent.putExtra("TAD", dateAndTime.getText().toString());
         //отправка результата
+
+        /*WITHOUT CASH
         Cash.getInstance().addEvent(noteNumber.getText().toString(), noteDescription.getText().toString(), dateAndTime.getText().toString());
+        */
+        repository.open();
+        repository.insert(new Event(0,
+                                        noteNumber.getText().toString(),
+                                        noteDescription.getText().toString(),
+                                        dateAndTime.getText().toString()));
+        repository.close();
+
         setResult(RESULT_OK, intent);
         finish();
     }

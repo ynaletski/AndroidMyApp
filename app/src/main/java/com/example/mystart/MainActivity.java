@@ -1,8 +1,8 @@
 package com.example.mystart;
 
-import android.content.Intent; // подключаем класс Intent
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View; // подключаем класс View для обработки нажатия кнопки
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,54 +10,85 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public final static String EXTRA_TIME_DATE = "EXTRA_TIME_DATE";
     final int REQUEST_TWO_ACT = 1;
 
     private EventAdapter eventAdapter;
+    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        repository = new Repository(this);
+
+        repository.open();
+        if(repository.getCount() == 0){
+            repository.insert(new Event(0,
+                    getResources().getString(R.string.defaultNumber),
+                    getResources().getString(R.string.defaultTextDescription),
+                    getResources().getString(R.string.defaultDateTime)));
+        }
+        repository.close();
+        /*WITHOUT CASH
         if (Cash.getInstance().getEvents().size() == 0) {
             Cash.getInstance().addEvent
                     (getResources().getString(R.string.defaultNumber),
                             getResources().getString(R.string.defaultTextDescription),
                             getResources().getString(R.string.defaultDateTime));
-        }
+        }*/
 
-        //стандартный адаптер
-        /*private EventAdapter adapter;*/
-        RecyclerView recyclerView = findViewById(R.id.eventList);
+        final RecyclerView recyclerView = findViewById(R.id.eventList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //если знаем за ранее размер списка то true
         recyclerView.setHasFixedSize(false);
-        eventAdapter = new EventAdapter(this, /*Cash.getInstance().getEvents(),*/ new removeClickListener() {
+        eventAdapter = new EventAdapter(this, new removeClickListener() {
 
             @Override
             public void removeEvent(int positionEvent) {
+
+                repository.open();
+                repository.delete(repository.getEvents().get(positionEvent).getId());
+                /*WITHOUT CASH
                 Cash.getInstance().getEvents().remove(positionEvent);
+                */
+
+                if(repository.getCount() == 0){
+                    repository.insert(new Event(0,
+                            getResources().getString(R.string.defaultNumber),
+                            getResources().getString(R.string.defaultTextDescription),
+                            getResources().getString(R.string.defaultDateTime)));
+                }
+                /*WITHOUT CASH
                 if (Cash.getInstance().getEvents().size() == 0) {
                     Cash.getInstance().addEvent
                             (getResources().getString(R.string.defaultNumber),
                                     getResources().getString(R.string.defaultTextDescription),
                                     getResources().getString(R.string.defaultDateTime));
                 }
+                */
+
+                eventAdapter.insertData(repository.getEvents());
+                repository.close();
+                /*WITHOUT CASH
                 eventAdapter.insertData(Cash.getInstance().getEvents());
+                */
             }
         });
         recyclerView.setAdapter(eventAdapter);
+
+        repository.open();
+        eventAdapter.insertData(repository.getEvents());
+        repository.close();
+        /*WITHOUT CASH
         eventAdapter.insertData(Cash.getInstance().getEvents());
+        */
 
     }
 
     // Метод обработки нажатия на кнопку
     public void goToAddEventActivity(View view) {
-        // действия, совершаемые после нажатия на кнопку
-        // Создаем объект Intent для вызова новой Activity
         Intent intent = new Intent(this, AddEventActivity.class);
-        // запуск activity
         startActivityForResult(intent, REQUEST_TWO_ACT);
     }
 
@@ -68,15 +99,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
 
-            //ArrayList<Event> eventList = new ArrayList<>();
-            //eventList.add(new Event(data.getStringExtra("NUMB"), data.getStringExtra("DESC"), data.getStringExtra("TAD")));
-
-            //перезапись
-            //Cash.getInstance().addEvent(data.getStringExtra("NUMB"), data.getStringExtra("DESC"), data.getStringExtra("TAD"));
-            //eventAdapter.notifyDataSetChanged();
-
-            //eventAdapter.insertData(eventList);
+            repository.open();
+            eventAdapter.insertData(repository.getEvents());
+            repository.close();
+            /*WITHOUT CASH
             eventAdapter.insertData(Cash.getInstance().getEvents());
+            */
         }
     }
 }

@@ -2,11 +2,11 @@ package com.example.mystart;
 
 public class Event {
 
+    private final int eventId;
     private String number;
     private String description;
     private String dateTime;
-    private static Integer EVENT_ID = 1;
-    private final Integer eventId;
+    private static int EVENT_ID = 1;
 
     Event(String number, String description, String dateTime) {
         this.number = number;
@@ -14,6 +14,17 @@ public class Event {
         this.dateTime = dateTime;
         this.eventId = EVENT_ID;
         EVENT_ID++;
+    }
+
+    Event(int eventId, String number, String description, String dateTime){
+        this.number = number;
+        this.description = description;
+        this.dateTime = dateTime;
+        this.eventId = eventId;
+    }
+
+    public int getId(){
+        return eventId;
     }
 
     public void setNumber(String number) {
